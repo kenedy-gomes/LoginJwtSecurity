@@ -1,6 +1,7 @@
 package com.teste.demo.Services;
 
 import com.teste.demo.Repositories.UserRepository;
+import com.teste.demo.model.ProfileDTO;
 import com.teste.demo.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,11 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Optional<Usuario> getUsuarioById(Long id) {
+    public Optional<ProfileDTO> getUsuarioByEmail(String email) {
+        return usuarioRepository.getUsuarioByEmail(email);
+    }
+
+    public Optional<Usuario> getUsuarioById(String id) {
         return usuarioRepository.findById(id);
     }
 
@@ -27,7 +32,7 @@ public class UsuarioService {
         return usuarioRepository.save(user);
     }
 
-    public void deleteUsuario(Long id) {
+    public void deleteUsuario(String id) {
         usuarioRepository.deleteById(id);
     }
 

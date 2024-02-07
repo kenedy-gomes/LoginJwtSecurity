@@ -41,7 +41,7 @@ public class AuthenticationController {
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data){
         if(this.repository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().body("E-mail already registered");
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        Usuario newUser = new Usuario(data.email(), encryptedPassword, data.role());
+        Usuario newUser = new Usuario(data.name(), data.email(), encryptedPassword, data.role(), data.avatarImg());
         this.repository.save(newUser);
         return ResponseEntity.ok().body("User registered successfully");
     }

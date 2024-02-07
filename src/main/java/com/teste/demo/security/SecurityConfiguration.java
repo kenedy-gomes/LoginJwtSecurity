@@ -33,12 +33,14 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, "/h2-console/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/filmes/tipo/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/filmes/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuarios").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/usuarios/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/filmes").hasRole("ADMIN")
-                        .requestMatchers(toH2Console()).permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/filmes/delete/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/delete/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
@@ -48,11 +50,6 @@ public class SecurityConfiguration {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
-    }
-
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(new AntPathRequestMatcher("/h2-console/**"));
     }
 
     @Bean

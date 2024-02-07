@@ -1,6 +1,11 @@
 CREATE TABLE filme (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
     name VARCHAR(255) NOT NULL,
-    description VARCHAR(255),
-    image VARCHAR(255)
+    description TEXT,
+    tipo VARCHAR(55),
+    duration VARCHAR(100),
+    categoria VARCHAR(100),
+    data_estreia DATE,
+    image TEXT
 );
+

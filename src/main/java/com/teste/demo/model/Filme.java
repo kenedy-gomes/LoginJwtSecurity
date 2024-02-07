@@ -6,32 +6,45 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
-@Entity
+
+
 @Table(name = "filme")
+@Entity(name = "filme")
 @EqualsAndHashCode(of = "id")
 public class Filme{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String name;
     private String description;
+    private String tipo;
+    private String duration;
+    private String categoria;
+    private LocalDate data_estreia;
     private String image;
 
     public Filme(){}
 
-    public Filme(String name, String description, String image) {
+    public Filme(String name, String description, String tipo, String duration, String categoria, LocalDate data_estreia, String image) {
         this.name = name;
         this.description = description;
+        this.tipo = tipo;
+        this.duration = duration;
+        this.categoria = categoria;
+        this.data_estreia = data_estreia;
         this.image = image;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,6 +62,38 @@ public class Filme{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public LocalDate getData_estreia() {
+        return data_estreia;
+    }
+
+    public void setData_estreia(LocalDate data_estreia) {
+        this.data_estreia = data_estreia;
     }
 
     public String getImage() {
