@@ -8,7 +8,6 @@ import com.teste.demo.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +40,6 @@ public class UsuarioController {
         }
     }
 
-
     @GetMapping("/{id}")
     public Optional<Usuario> getUsuarioById(@PathVariable String id) {
         return usuarioService.getUsuarioById(id);
@@ -52,6 +50,13 @@ public class UsuarioController {
         Usuario newAccount = usuarioService.saveUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(newAccount);
     }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Usuario> atualizarUsuario(@RequestBody Usuario usuarioAtt) {
+        Usuario usuario = usuarioService.atualizarUsuario(usuarioAtt);
+        return ResponseEntity.ok(usuario);
+    }
+
 
     @DeleteMapping("/delete/{id}")
     public void deleteUsuario(@PathVariable String id) {

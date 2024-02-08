@@ -5,6 +5,7 @@ import com.teste.demo.model.ProfileDTO;
 import com.teste.demo.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,14 @@ public class UsuarioService {
 
     public Usuario saveUsuario(Usuario user) {
         return usuarioRepository.save(user);
+    }
+
+    public Usuario atualizarUsuario(Usuario usuario) {
+        Usuario usuarioExistente = usuario;
+        usuarioExistente.setName(usuario.getName());
+        usuarioExistente.setEmail(usuario.getUsername());
+        usuarioExistente.setAvatarImg(usuario.getAvatarImg());
+        return usuarioExistente;
     }
 
     public void deleteUsuario(String id) {
