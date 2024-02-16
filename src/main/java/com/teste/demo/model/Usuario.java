@@ -64,7 +64,7 @@ public class Usuario implements UserDetails {
     }
 
     public String getAvatarImg() {
-        return avatarImg;
+        return this.avatarImg;
     }
 
     public void setAvatarImg(String avatarImg) {
@@ -108,5 +108,6 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 
 }
